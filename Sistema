@@ -1,1 +1,76 @@
+#include <stdio.h>
 
+typedef struct {
+  char nome[40];
+  int RA;
+  float nota[3];
+  int frequencia;
+}Aluno;
+
+void imprimeMenu();
+int buscaRA (int[], int, int);
+void insereAluno (int [], int, int);
+
+int main(){
+  int op=0;
+  Aluno turma[50];
+  int n=0, RA;
+
+  while(op!=5){
+    system("clear");
+    imprimeMenu();
+    scanf("%d",&op);
+    switch(op){
+      case 1:
+        if(n==50){
+          printf("\nTurma Lotada!");
+        }
+        else{
+          printf("\nRA: ");
+          scanf("%d",&RA);
+          getchar();
+          if(buscaRA(turma,n,RA)==0){
+            insereAluno(turmaLP,n,RA);
+            n++;
+          }
+          else{
+            printf("\nAluno já cadastrado.");
+          }
+        }
+        break;
+      case 2:
+        
+}
+
+void imprimeMenu (){
+  printf ("\nMenu:");
+  printf("\n1- inserir aluno");
+  printf ("\n2- remover aluno");
+  printf ("\n3- vizualizar aluno");
+  printf ("\n4- buscar aluno");
+  printf ("\n5- sair");
+  printf ("\nOpção: ");
+}
+
+int buscaRA (t[], int n, int RA){
+  for (int i=0; i<n; i++){
+    if (RA==t[i].RA){
+      return 0; 
+    }
+  }
+  return 0;
+}
+
+void insereAluno (int t[], int n, int RA){
+  printf ("Nome: ");
+  fgets (t[n].nome, sizeof t[n].nome, stdin);
+  t[n].nome [strlen (t[n].nome) -1) = '\0';
+  t[n].RA = RA;
+  printf ("RA: %d", t[n].RA);
+  for (int i=0; i<3; i++){
+    printf ("Nota %d: ",i+1);
+    scanf ("%f", &t[n].nota[i]);
+  }
+  printf ("Frequencia: ");
+  scanf ("%d", &t[n].frequencia);
+}
