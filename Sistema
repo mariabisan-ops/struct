@@ -33,7 +33,7 @@ int main(){
           printf("\nRA: ");
           scanf("%d",&RA);
           getchar();
-          if(buscaRA(turma,n,RA)==0){
+          if(buscaRA(turma,n,RA)==0]{
             insereAluno(turma, n,RA);
             n++;
           }
@@ -108,24 +108,22 @@ void insereAluno (Aluno t[], int n, int RA){
 void removeAluno (Aluno t[], int n, int RA){
   for(int i = 0; i < n; i++){
     if(t[i].RA == RA){
-      t[i].RA = -1;
-      t[i].nome[0] = '\0';
-      t[i].frequencia = 0;
-      for(int j = 0; j < 3; j++){
-        t[i].notas[j] = 0;
+      for (int j=i; j<n -1; j++){
+        t[j] = t[j+1];
       }
       printf("Aluno removido.\n");
+      return;
     }
   }
 }
 
 void imprimeAluno (Aluno t[], int n, int RA){
-  for (int i=; i<n; i++){
+  for (int i=0; i<n; i++){
     if (RA==t[i].RA){
       printf ("\nRA: %d", t[i].RA);
       printf ("\nNome: %s", t[i].nome);
       for (int j =0; j<3; j++){
-        printf ("\nNota %d: %f", i+1, t[i].nota[j]);
+        printf ("\nNota %d: %.2f", j+1, t[i].nota[j]);
       }
       printf ("\nFrequencia: %d", t[i].frequencia);
     }
