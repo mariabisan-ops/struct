@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 typedef struct {
   char nome[40];
@@ -8,8 +10,10 @@ typedef struct {
 }Aluno;
 
 void imprimeMenu();
-int buscaRA (int[], int, int);
-void insereAluno (int [], int, int);
+int buscaRA (Aluno [], int, int);
+void insereAluno (Aluno [], int, int);
+void removeAluno (Aluno [], int, int);
+void imprimeAluno (Aluno [], int, int);
 
 int main(){
   int op=0;
@@ -30,7 +34,7 @@ int main(){
           scanf("%d",&RA);
           getchar();
           if(buscaRA(turma,n,RA)==0){
-            insereAluno(turmaLP,n,RA);
+            insereAluno(turma, n,RA);
             n++;
           }
           else{
@@ -39,7 +43,29 @@ int main(){
         }
         break;
       case 2:
-        
+        printf ("\nRA: ");
+        scanf ("%d", &RA);
+        getchar();
+        if (buscaRA (turma, n, RA) == 1){
+          printf ("\nAluno não encontrado");
+        }
+        else {
+          removeAluno (turma, n, RA);
+          n--;
+        }
+        break;
+      case 3:
+        printf ("\nRA: ");
+        scanf ("%d", &RA);
+        getchar ();  
+        if (buscaRA (turma, n, RA) == 1){
+          imprimeAluno (turma, n, RA);
+        }
+        else {
+          printf ("\nAluno não encontrado");
+        }
+        break;
+      case 4:
 }
 
 void imprimeMenu (){
@@ -52,16 +78,16 @@ void imprimeMenu (){
   printf ("\nOpção: ");
 }
 
-int buscaRA (t[], int n, int RA){
+int buscaRA (Aluno t[], int n, int RA){
   for (int i=0; i<n; i++){
     if (RA==t[i].RA){
-      return 0; 
+      return 1; 
     }
   }
   return 0;
 }
 
-void insereAluno (int t[], int n, int RA){
+void insereAluno (Aluno t[], int n, int RA){
   printf ("Nome: ");
   fgets (t[n].nome, sizeof t[n].nome, stdin);
   t[n].nome [strlen (t[n].nome) -1) = '\0';
@@ -73,4 +99,31 @@ void insereAluno (int t[], int n, int RA){
   }
   printf ("Frequencia: ");
   scanf ("%d", &t[n].frequencia);
+}
+
+void removeAluno (Aluno t[], int n, int RA){
+  for(int i = 0; i < n; i++){
+    if(t[i].RA == RA){
+      t[i].RA = -1;
+      t[i].nome[0] = '\0';
+      t[i].frequencia = 0;
+      for(int j = 0; j < 3; j++){
+        t[i].notas[j] = 0;
+      }
+      printf("Aluno removido.\n");
+    }
+  }
+}
+
+void imprimeAluno (Aluno t[], int n, int RA){
+  for (int i=; i<n; i++){
+    if (RA==t[i].RA){
+      printf ("\nRA: %d", t[i].RA);
+      printf ("\nNome: %s", t[i].nome);
+      for (int j =0; j<3; j++){
+        printf ("\nNota %d: %f", i+1, t[i].nota[j]);
+      }
+      printf ("\nFrequencia: %d", t[i].frequencia);
+    }
+  }
 }
