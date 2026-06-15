@@ -20,7 +20,7 @@ int main(){
   Aluno turma[50];
   int n=0, RA;
 
-  while(op!=5){
+  while(op!=4){
     system("clear");
     imprimeMenu();
     scanf("%d",&op);
@@ -66,6 +66,11 @@ int main(){
         }
         break;
       case 4:
+        printf ("\nTCHAU!");
+        break;
+      default:
+        printf("\nOpção incorreta.");
+        break;
 }
 
 void imprimeMenu (){
@@ -73,8 +78,7 @@ void imprimeMenu (){
   printf("\n1- inserir aluno");
   printf ("\n2- remover aluno");
   printf ("\n3- vizualizar aluno");
-  printf ("\n4- buscar aluno");
-  printf ("\n5- sair");
+  printf ("\n4- sair");
   printf ("\nOpção: ");
 }
 
