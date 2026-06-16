@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 
 typedef struct {
   char nome[40];
@@ -14,14 +13,15 @@ int buscaRA (Aluno [], int, int);
 void insereAluno (Aluno [], int, int);
 void removeAluno (Aluno [], int, int);
 void imprimeAluno (Aluno [], int, int);
+void alteraDados (Aluno [], int, int);
 
 int main(){
-  int op=0;
   Aluno turma[50];
-  int n=0, RA;
+  int op;
+  int n=0;
+  int RA;
 
-  while(op!=4){
-    system("clear");
+  while(op!=5){
     imprimeMenu();
     scanf("%d",&op);
     switch(op){
@@ -32,8 +32,7 @@ int main(){
         else{
           printf("\nRA: ");
           scanf("%d",&RA);
-          getchar();
-          if(buscaRA(turma,n,RA)==0]{
+          if(buscaRA(turma,n,RA)==0){
             insereAluno(turma, n,RA);
             n++;
           }
@@ -45,7 +44,6 @@ int main(){
       case 2:
         printf ("\nRA: ");
         scanf ("%d", &RA);
-        getchar();
         if (buscaRA (turma, n, RA) == 1){
           printf ("\nAluno não encontrado");
         }
@@ -56,8 +54,7 @@ int main(){
         break;
       case 3:
         printf ("\nRA: ");
-        scanf ("%d", &RA);
-        getchar ();  
+        scanf ("%d", &RA); 
         if (buscaRA (turma, n, RA) == 1){
           imprimeAluno (turma, n, RA);
         }
@@ -66,11 +63,23 @@ int main(){
         }
         break;
       case 4:
+        printf ("\nRA: ");
+        scanf ("%d", &RA); 
+        if (buscaRA (turma, n, RA) == 1){
+          alteraDados (turma, n, RA);
+        }
+        else {
+          printf ("\nAluno não encontrado");
+        }
+        break;
+      case 5:
         printf ("\nTCHAU!");
         break;
       default:
         printf("\nOpção incorreta.");
         break;
+    }
+  }
 }
 
 void imprimeMenu (){
@@ -78,7 +87,8 @@ void imprimeMenu (){
   printf("\n1- inserir aluno");
   printf ("\n2- remover aluno");
   printf ("\n3- vizualizar aluno");
-  printf ("\n4- sair");
+  printf ("\n4- altera dados aluno");
+  printf ("\n5- sair");
   printf ("\nOpção: ");
 }
 
@@ -126,6 +136,23 @@ void imprimeAluno (Aluno t[], int n, int RA){
         printf ("\nNota %d: %.2f", j+1, t[i].nota[j]);
       }
       printf ("\nFrequencia: %d", t[i].frequencia);
+    }
+  }
+}
+
+void alteraDados (Aluno t[], int n, int RA){
+for (int i=0; i<n; i++){
+    if (RA==t[i].RA){
+      printf ("\nRA: %d", t[i].RA);
+      printf ("\nNome: ");
+      fgets (t[i].nome, sizeof (t[i].nome), stdin);
+      t[i].nome [strlen(t[i].nome) - 1] = '\0';
+      for (int j =0; j<3; j++){
+        printf ("\nNota %d: ", j+1);
+        scanf ("%d", &t[i].nota[j]);
+      }
+      printf ("\nFrequencia: ");
+      scanf ("%d", &t[i].frequencia);
     }
   }
 }
