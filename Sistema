@@ -145,6 +145,7 @@ for (int i=0; i<n; i++){
     if (RA==t[i].RA){
       printf ("\nRA: %d", t[i].RA);
       printf ("\nNome: ");
+      getchar();
       fgets (t[i].nome, sizeof (t[i].nome), stdin);
       t[i].nome [strlen(t[i].nome) - 1] = '\0';
       for (int j =0; j<3; j++){
